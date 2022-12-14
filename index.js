@@ -1,7 +1,7 @@
-import express from 'express';
-import {connect} from './db.js';
-import mongoose from "mongoose";
-import dotenv from 'dotenv';
+const express = require('express');
+const db = require('./db.js');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 // Init access to .env config file
 dotenv.config();
@@ -14,7 +14,7 @@ app.listen(port, () => {
 })
 
 app.get('/java_questions', (req, res) => {
-    connect().then(async () => {
+    db.connect().then(async () => {
        const result = await mongoose.connection.db.collection('question').find({ type: 'Java', correctAnswer: {$exists: true} }).toArray();
        res.send(result)
     })

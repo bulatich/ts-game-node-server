@@ -2,11 +2,13 @@ const express = require('express');
 const db = require('./db.js');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors')
 
 // Init access to .env config file
 dotenv.config();
 
 const app = express()
+app.use(cors())
 const port = process.env.PORT || 9091
 
 app.listen(port, () => {
